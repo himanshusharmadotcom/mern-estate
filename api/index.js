@@ -3,6 +3,7 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import userRouter from './routes/user.route.js'
 import authRouter from './routes/auth.route.js'
+import cookieParser from 'cookie-parser';
 dotenv.config(); //initialize the dotenv
 
 mongoose.connect(process.env.MONGO).then(() => {
@@ -14,6 +15,8 @@ mongoose.connect(process.env.MONGO).then(() => {
 const app = express()
 
 app.use(express.json()); //allows the client to send and reciece data in json format
+
+app.use(cookieParser());
 
 app.use('/api/user', userRouter)
 app.use('/api/auth', authRouter);
